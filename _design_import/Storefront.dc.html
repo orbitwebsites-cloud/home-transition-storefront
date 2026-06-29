@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #F3EFE7; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #2B2926; -webkit-font-smoothing: antialiased; }
+  ::selection { background: #243A5E; color: #F8F5EF; }
+  a { color: inherit; }
+</style>
+</helmet>
+<div style="min-height:100vh; background:#F3EFE7;">
+
+  <!-- PROTOTYPE SWITCHER -->
+  <div style="position:fixed; left:50%; transform:translateX(-50%); bottom:18px; z-index:90; display:flex; align-items:center; gap:6px; background:rgba(26,28,32,0.92); backdrop-filter:blur(8px); padding:6px 6px 6px 14px; border-radius:999px; box-shadow:0 10px 34px rgba(20,24,34,0.34); font-family:'Inter',sans-serif;">
+    <span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#9AA0AB; font-weight:600; margin-right:4px;">Prototype</span>
+    <button onClick="{{ goLanding }}" style="{{ tabLanding }}">Sales page</button>
+    <button onClick="{{ goLead }}" style="{{ tabLead }}">Free checklist</button>
+    <button onClick="{{ goSuccess }}" style="{{ tabSuccess }}">Success</button>
+    <button onClick="{{ goEmail }}" style="{{ tabEmail }}">Email</button>
+  </div>
+
+  <!-- ============ LANDING ============ -->
+  <sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+  <div>
+    <!-- top bar -->
+    <header style="position:sticky; top:0; z-index:40; display:flex; align-items:center; justify-content:space-between; padding:18px 7vw; background:rgba(243,239,231,0.86); backdrop-filter:blur(10px); border-bottom:1px solid rgba(36,58,94,0.10);">
+      <div style="display:flex; align-items:baseline; gap:10px;">
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:22px; color:#243A5E; letter-spacing:-0.01em;">The Home Transition</span>
+        <span style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#9A887F; font-weight:600;">System</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:22px;">
+        <a onClick="{{ goLead }}" style="font-size:14px; font-weight:500; color:#5C5A55; cursor:pointer; text-decoration:none;">Free checklist</a>
+        <button onClick="{{ openCheckout }}" style="font-family:'Inter',sans-serif; font-size:14px; font-weight:600; color:#F8F5EF; background:#243A5E; border:none; padding:11px 20px; border-radius:10px; cursor:pointer;">Get the workbook</button>
+      </div>
+    </header>
+
+    <!-- hero -->
+    <section style="padding:7vh 7vw 9vh; max-width:1180px; margin:0 auto;">
+      <div style="display:inline-flex; align-items:center; gap:9px; padding:7px 15px; border-radius:999px; background:rgba(36,58,94,0.06); border:1px solid rgba(36,58,94,0.12); margin-bottom:34px;">
+        <span style="width:7px; height:7px; border-radius:50%; background:#B0673E;"></span>
+        <span style="font-size:13px; font-weight:600; color:#3C4B63; letter-spacing:0.01em;">For the adult child who's suddenly in charge</span>
+      </div>
+      <h1 style="font-family:'Fraunces',serif; font-weight:400; font-size:clamp(40px,6.4vw,82px); line-height:1.02; letter-spacing:-0.022em; color:#243A5E; max-width:16ch; margin-bottom:30px;">Move your parent out of the family home <span style="font-style:italic; color:#B0673E;">without</span> tearing the family apart.</h1>
+      <p style="font-size:clamp(18px,2vw,22px); line-height:1.55; color:#54524C; max-width:54ch; margin-bottom:40px;">A step-by-step workbook for the hardest logistics and the harder conversations — from the first "we need to talk" to the first 30 days in the new place.</p>
+      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:16px 22px;">
+        <button onClick="{{ openCheckout }}" style="font-family:'Inter',sans-serif; font-size:17px; font-weight:600; color:#F8F5EF; background:#243A5E; border:none; padding:17px 30px; border-radius:12px; cursor:pointer; box-shadow:0 10px 26px rgba(36,58,94,0.24);">Get the workbook — $49</button>
+        <a onClick="{{ goLead }}" style="font-size:16px; font-weight:600; color:#243A5E; cursor:pointer; text-decoration:underline; text-underline-offset:4px; text-decoration-color:rgba(36,58,94,0.3);">Start with the free checklist</a>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:10px 28px; margin-top:34px;">
+        <span style="display:flex; align-items:center; gap:9px; font-size:14px; color:#6B6962; font-weight:500;"><span style="color:#5C7A5E;">✓</span> Instant PDF download</span>
+        <span style="display:flex; align-items:center; gap:9px; font-size:14px; color:#6B6962; font-weight:500;"><span style="color:#5C7A5E;">✓</span> 14-day money-back guarantee</span>
+        <span style="display:flex; align-items:center; gap:9px; font-size:14px; color:#6B6962; font-weight:500;"><span style="color:#5C7A5E;">✓</span> Fillable — works on paper or screen</span>
+      </div>
+    </section>
+
+    <!-- pain -->
+    <section style="background:#243A5E; color:#EDE7DC; padding:9vh 7vw;">
+      <div style="max-width:1180px; margin:0 auto;">
+        <p style="font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:#9DB0CE; font-weight:600; margin-bottom:22px;">If you're the one holding this together</p>
+        <h2 style="font-family:'Fraunces',serif; font-weight:400; font-size:clamp(28px,3.6vw,46px); line-height:1.12; letter-spacing:-0.015em; max-width:20ch; margin-bottom:48px; color:#F6F1E7;">You didn't sign up to be a project manager, a therapist, and a moving company at once.</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:30px 40px;">
+          <sc-for list="{{ pains }}" as="p" hint-placeholder-count="4">
+            <div style="border-top:1px solid rgba(237,231,220,0.22); padding-top:18px;">
+              <p style="font-family:'Fraunces',serif; font-size:30px; color:#B0673E; margin-bottom:12px;">{{ p.mark }}</p>
+              <p style="font-size:16px; line-height:1.55; color:#CBD3E0;">{{ p.text }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <p style="font-size:clamp(17px,1.9vw,20px); line-height:1.55; color:#EDE7DC; max-width:50ch; margin-top:52px;">You don't need more willpower. You need a plan that already knows what comes next.</p>
+      </div>
+    </section>
+
+    <!-- start here pathfinder -->
+    <section style="padding:9vh 7vw; max-width:1180px; margin:0 auto;">
+      <div style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:14px;">
+        <span style="font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:#B0673E; font-weight:600;">The "Start Here" path finder</span>
+      </div>
+      <h2 style="font-family:'Fraunces',serif; font-weight:400; font-size:clamp(28px,3.6vw,46px); line-height:1.1; letter-spacing:-0.015em; color:#243A5E; max-width:18ch; margin-bottom:16px;">Tell us where you are, and we'll tell you where to begin.</h2>
+      <p style="font-size:17px; line-height:1.55; color:#54524C; max-width:52ch; margin-bottom:44px;">Four entry points, so you never open the workbook to a blank page wondering what to do first.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;">
+        <sc-for list="{{ paths }}" as="pa" hint-placeholder-count="4">
+          <div style="background:#FBF8F2; border:1px solid rgba(36,58,94,0.10); border-radius:16px; padding:26px 24px;">
+            <span style="display:inline-block; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; font-weight:700; color:#B0673E; margin-bottom:14px;">{{ pa.tag }}</span>
+            <h3 style="font-family:'Fraunces',serif; font-weight:500; font-size:21px; color:#243A5E; line-height:1.18; margin-bottom:9px;">{{ pa.title }}</h3>
+            <p style="font-size:15px; line-height:1.5; color:#5C5A55;">{{ pa.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- whats inside -->
+    <section style="background:#FBF8F2; border-top:1px solid rgba(36,58,94,0.08); border-bottom:1px solid rgba(36,58,94,0.08); padding:9vh 7vw;">
+      <div style="max-width:1180px; margin:0 auto;">
+        <p style="font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:#B0673E; font-weight:600; margin-bottom:16px;">What's inside</p>
+        <h2 style="font-family:'Fraunces',serif; font-weight:400; font-size:clamp(28px,3.6vw,46px); line-height:1.1; letter-spacing:-0.015em; color:#243A5E; max-width:16ch; margin-bottom:52px;">Six modules. One calm path through the whole thing.</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:4px 56px;">
+          <sc-for list="{{ modules }}" as="m" hint-placeholder-count="6">
+            <div style="display:flex; gap:22px; padding:26px 0; border-top:1px solid rgba(36,58,94,0.12);">
+              <span style="font-family:'Fraunces',serif; font-size:26px; font-weight:500; color:#B0673E; line-height:1; min-width:34px;">{{ m.num }}</span>
+              <div>
+                <h3 style="font-family:'Fraunces',serif; font-weight:500; font-size:22px; color:#243A5E; line-height:1.16; margin-bottom:10px;">{{ m.title }}</h3>
+                <p style="font-size:15.5px; line-height:1.58; color:#54524C;">{{ m.benefit }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- featured methods -->
+    <section style="padding:9vh 7vw; max-width:1180px; margin:0 auto;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px;">
+        <sc-for list="{{ features }}" as="f" hint-placeholder-count="2">
+          <div style="position:relative; background:#243A5E; color:#EDE7DC; border-radius:20px; padding:38px 34px; overflow:hidden;">
+            <span style="position:absolute; right:24px; top:18px; font-family:'Fraunces',serif; font-size:64px; color:rgba(176,103,62,0.28); line-height:1;">{{ f.glyph }}</span>
+            <span style="display:inline-block; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:#D89A6F; margin-bottom:16px;">Signature method</span>
+            <h3 style="font-family:'Fraunces',serif; font-weight:400; font-size:26px; line-height:1.16; color:#F6F1E7; max-width:18ch; margin-bottom:12px;">{{ f.title }}</h3>
+            <p style="font-size:16px; line-height:1.55; color:#C6CFDD; max-width:34ch;">{{ f.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- worked example -->
+    <section style="padding:2vh 7vw 9vh; max-width:1180px; margin:0 auto;">
+      <div style="background:#FBF8F2; border:1px solid rgba(36,58,94,0.12); border-radius:24px; padding:clamp(34px,5vw,64px); display:grid; grid-template-columns:1.15fr 0.85fr; gap:46px; align-items:center;">
+        <div>
+          <p style="font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:#B0673E; font-weight:600; margin-bottom:18px;">See it before you buy</p>
+          <h2 style="font-family:'Fraunces',serif; font-weight:400; font-size:clamp(26px,3.2vw,40px); line-height:1.12; letter-spacing:-0.012em; color:#243A5E; max-width:20ch; margin-bottom:20px;">A complete worked example, right at the front.</h2>
+          <p style="font-size:17px; line-height:1.62; color:#54524C; max-width:48ch; margin-bottom:18px;">Watch Denise help her 78-year-old mother sort a single linen closet in 30 minutes — a filled-in inventory sheet and sibling board showing exactly what a good first pass looks like.</p>
+          <p style="font-size:17px; line-height:1.62; color:#243A5E; font-weight:600; max-width:46ch;">You're never staring at a blank template wondering if you're doing it right.</p>
+        </div>
+        <div style="background:#fff; border:1px solid rgba(36,58,94,0.14); border-radius:14px; padding:24px; box-shadow:0 18px 40px rgba(36,58,94,0.10);">
+          <p style="font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:#9A887F; font-weight:700; margin-bottom:14px;">Linen closet — first pass</p>
+          <sc-for list="{{ exampleRows }}" as="r" hint-placeholder-count="4">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:11px 0; border-bottom:1px solid rgba(36,58,94,0.08);">
+              <span style="font-size:14px; color:#3C3A36;">{{ r.item }}</span>
+              <span style="font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#5C7A5E; background:rgba(92,122,94,0.12); padding:4px 10px; border-radius:6px;">{{ r.tag }}</span>
+            </div>
+          </sc-for>
+          <p style="font-size:13px; color:#9A887F; margin-top:14px; font-style:italic;">30 minutes. One closet. One decision at a time.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- price / offer -->
+    <section style="padding:2vh 7vw 9vh; max-width:760px; margin:0 auto; text-align:center;">
+      <div style="background:#243A5E; border-radius:26px; padding:clamp(38px,5vw,60px); color:#EDE7DC;">
+        <p style="font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:#9DB0CE; font-weight:600; margin-bottom:22px;">The complete system</p>
+        <div style="display:flex; align-items:baseline; justify-content:center; gap:10px; margin-bottom:8px;">
+          <span style="font-family:'Fraunces',serif; font-size:clamp(56px,9vw,88px); font-weight:500; color:#F6F1E7; line-height:1;">$49</span>
+          <span style="font-size:16px; color:#9DB0CE; font-weight:500;">one-time · yours forever</span>
+        </div>
+        <p style="font-size:17px; line-height:1.55; color:#CBD3E0; max-width:40ch; margin:18px auto 32px;">Six modules, two signature methods, the path finder, and the worked example — in one fillable PDF.</p>
+        <button onClick="{{ openCheckout }}" style="font-family:'Inter',sans-serif; font-size:18px; font-weight:600; color:#243A5E; background:#F3EFE7; border:none; padding:18px 38px; border-radius:13px; cursor:pointer; box-shadow:0 12px 30px rgba(0,0,0,0.22);">Get the workbook — $49</button>
+        <div style="display:flex; align-items:center; justify-content:center; gap:9px; margin-top:24px;">
+          <span style="width:8px; height:8px; border-radius:50%; background:#7FA081;"></span>
+          <p style="font-size:14px; color:#BFD0C0; font-weight:500;">14-Day Satisfaction Guarantee — full refund, no forms, no hassle.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="padding:2vh 7vw 9vh; max-width:880px; margin:0 auto;">
+      <h2 style="font-family:'Fraunces',serif; font-weight:400; font-size:clamp(28px,3.6vw,44px); line-height:1.1; color:#243A5E; margin-bottom:8px;">Questions, answered.</h2>
+      <p style="font-size:16px; color:#6B6962; margin-bottom:40px;">The things people ask before they buy.</p>
+      <div>
+        <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="6">
+          <div onClick="{{ q.toggle }}" style="border-top:1px solid rgba(36,58,94,0.14); padding:24px 0; cursor:pointer;">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:20px;">
+              <h3 style="font-family:'Fraunces',serif; font-weight:500; font-size:20px; color:#243A5E; line-height:1.3;">{{ q.q }}</h3>
+              <span style="font-family:'Fraunces',serif; font-size:24px; color:#B0673E; line-height:1; flex-shrink:0;">{{ q.sign }}</span>
+            </div>
+            <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+              <p style="font-size:16px; line-height:1.62; color:#54524C; max-width:62ch; margin-top:14px;">{{ q.a }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+        <div style="border-top:1px solid rgba(36,58,94,0.14);"></div>
+      </div>
+    </section>
+
+    <!-- footer + disclaimer -->
+    <footer style="background:#1F3252; color:#AEB9CC; padding:7vh 7vw 8vh;">
+      <div style="max-width:1180px; margin:0 auto;">
+        <p style="font-family:'Fraunces',serif; font-size:26px; color:#F6F1E7; margin-bottom:28px; max-width:18ch;">It's a hard season. You don't have to wing it.</p>
+        <button onClick="{{ openCheckout }}" style="font-family:'Inter',sans-serif; font-size:16px; font-weight:600; color:#243A5E; background:#F3EFE7; border:none; padding:15px 30px; border-radius:11px; cursor:pointer; margin-bottom:46px;">Get the workbook — $49</button>
+        <p style="font-size:13.5px; line-height:1.65; color:#8E9AB0; max-width:78ch; border-top:1px solid rgba(255,255,255,0.10); padding-top:26px;">This is a planning and coordination workbook. It does not provide legal, tax, financial, medical, or real-estate advice — it helps your family organize the decisions and bring the right professionals in when needed.</p>
+        <p style="font-size:13px; color:#6F7C92; margin-top:20px;">© 2026 The Home Transition System · <a onClick="{{ goLead }}" style="cursor:pointer; text-decoration:underline;">Free checklist</a> · Refund policy · Privacy</p>
+      </div>
+    </footer>
+  </div>
+  </sc-if>
+
+  <!-- ============ LEAD MAGNET ============ -->
+  <sc-if value="{{ isLead }}" hint-placeholder-val="{{ false }}">
+  <div style="min-height:100vh; display:flex; flex-direction:column;">
+    <header style="display:flex; align-items:center; justify-content:space-between; padding:18px 7vw; border-bottom:1px solid rgba(36,58,94,0.10);">
+      <div onClick="{{ goLanding }}" style="display:flex; align-items:baseline; gap:10px; cursor:pointer;">
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:22px; color:#243A5E;">The Home Transition</span>
+        <span style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#9A887F; font-weight:600;">System</span>
+      </div>
+      <a onClick="{{ goLanding }}" style="font-size:14px; font-weight:500; color:#5C5A55; cursor:pointer;">← Back to the workbook</a>
+    </header>
+    <div style="flex:1; display:grid; grid-template-columns:1.1fr 0.9fr; min-height:0;">
+      <div style="padding:clamp(40px,7vw,90px) 7vw; display:flex; flex-direction:column; justify-content:center; max-width:640px;">
+        <span style="display:inline-flex; width:fit-content; align-items:center; gap:9px; padding:7px 15px; border-radius:999px; background:rgba(176,103,62,0.10); border:1px solid rgba(176,103,62,0.22); margin-bottom:30px; font-size:13px; font-weight:600; color:#A85F37;">Free · no credit card</span>
+        <h1 style="font-family:'Fraunces',serif; font-weight:400; font-size:clamp(34px,4.6vw,58px); line-height:1.04; letter-spacing:-0.02em; color:#243A5E; margin-bottom:22px; max-width:14ch;">The first conversation, made easier.</h1>
+        <p style="font-size:18px; line-height:1.58; color:#54524C; max-width:46ch; margin-bottom:30px;">Get the free <strong style="color:#243A5E;">"Before You Say Anything" checklist</strong> — the five things to have ready before you raise the move with your parent, so the first talk doesn't go sideways.</p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:13px; margin-bottom:8px;">
+          <sc-for list="{{ leadBullets }}" as="b" hint-placeholder-count="3">
+            <li style="display:flex; align-items:flex-start; gap:12px; font-size:16px; color:#3C3A36;"><span style="color:#5C7A5E; margin-top:1px;">✓</span> {{ b }}</li>
+          </sc-for>
+        </ul>
+      </div>
+      <div style="background:#243A5E; padding:clamp(40px,6vw,80px) 6vw; display:flex; flex-direction:column; justify-content:center;">
+        <sc-if value="{{ leadSent }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:left;">
+            <p style="font-family:'Fraunces',serif; font-size:40px; color:#7FA081; margin-bottom:18px;">✓</p>
+            <h2 style="font-family:'Fraunces',serif; font-weight:400; font-size:30px; color:#F6F1E7; line-height:1.15; margin-bottom:14px;">Check your inbox.</h2>
+            <p style="font-size:16px; line-height:1.6; color:#CBD3E0; max-width:34ch; margin-bottom:30px;">Your checklist is on its way to <strong style="color:#F6F1E7;">{{ leadEmail }}</strong>. If it's not there in a minute, peek in spam.</p>
+            <button onClick="{{ goLanding }}" style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600; color:#243A5E; background:#F3EFE7; border:none; padding:14px 26px; border-radius:11px; cursor:pointer;">See the full workbook →</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ leadFormOpen }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <h2 style="font-family:'Fraunces',serif; font-weight:400; font-size:28px; color:#F6F1E7; line-height:1.18; margin-bottom:10px;">Where should we send it?</h2>
+            <p style="font-size:15px; line-height:1.55; color:#9DB0CE; margin-bottom:26px;">One email. The checklist, then occasional notes — unsubscribe anytime.</p>
+            <label style="display:block; font-size:13px; font-weight:600; color:#9DB0CE; letter-spacing:0.04em; margin-bottom:8px;">Email address</label>
+            <input value="{{ leadEmail }}" onInput="{{ onLeadInput }}" placeholder="you@example.com" type="email" style="width:100%; font-family:'Inter',sans-serif; font-size:16px; color:#1F2A3D; background:#F6F1E7; border:1px solid rgba(255,255,255,0.2); border-radius:11px; padding:15px 16px; margin-bottom:8px; outline:none;" />
+            <sc-if value="{{ leadError }}" hint-placeholder-val="{{ false }}">
+              <p style="font-size:13px; color:#E7A98A; margin-bottom:8px;">Please enter a valid email address.</p>
+            </sc-if>
+            <button onClick="{{ submitLead }}" style="width:100%; font-family:'Inter',sans-serif; font-size:17px; font-weight:600; color:#243A5E; background:#F3EFE7; border:none; padding:16px; border-radius:11px; cursor:pointer; margin-top:12px;">Send me the free checklist</button>
+            <p style="font-size:12.5px; line-height:1.5; color:#7E8DA6; margin-top:16px;">We store your email to send the checklist and won't sell it. <span style="font-style:italic;">(In production this writes to your Supabase table via the lead route.)</span></p>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ SUCCESS ============ -->
+  <sc-if value="{{ isSuccess }}" hint-placeholder-val="{{ false }}">
+  <div style="min-height:100vh; display:flex; flex-direction:column;">
+    <header style="display:flex; align-items:center; justify-content:center; padding:20px 7vw; border-bottom:1px solid rgba(36,58,94,0.10);">
+      <div style="display:flex; align-items:baseline; gap:10px;">
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:22px; color:#243A5E;">The Home Transition</span>
+        <span style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#9A887F; font-weight:600;">System</span>
+      </div>
+    </header>
+    <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:6vh 7vw;">
+      <div style="max-width:600px; width:100%; text-align:center;">
+        <div style="width:70px; height:70px; border-radius:50%; background:rgba(92,122,94,0.14); display:flex; align-items:center; justify-content:center; margin:0 auto 28px;">
+          <span style="font-family:'Fraunces',serif; font-size:38px; color:#5C7A5E; line-height:1;">✓</span>
+        </div>
+        <p style="font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:#B0673E; font-weight:600; margin-bottom:16px;">Payment confirmed</p>
+        <h1 style="font-family:'Fraunces',serif; font-weight:400; font-size:clamp(34px,5vw,56px); line-height:1.06; letter-spacing:-0.02em; color:#243A5E; margin-bottom:18px;">You're all set. Take a breath.</h1>
+        <p style="font-size:18px; line-height:1.6; color:#54524C; max-width:46ch; margin:0 auto 38px;">Your copy of the Home Transition System is ready. We've also emailed a download link to your receipt address.</p>
+
+        <div style="background:#FBF8F2; border:1px solid rgba(36,58,94,0.14); border-radius:18px; padding:30px 28px; text-align:left;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:20px;">
+            <div>
+              <p style="font-family:'Fraunces',serif; font-size:20px; color:#243A5E; font-weight:500;">Home Transition System</p>
+              <p style="font-size:13.5px; color:#8A887F;">PDF workbook · 64 pages · fillable</p>
+            </div>
+            <span style="font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#5C7A5E; background:rgba(92,122,94,0.12); padding:5px 11px; border-radius:6px;">Unlocked</span>
+          </div>
+          <button onClick="{{ startDownload }}" style="width:100%; font-family:'Inter',sans-serif; font-size:17px; font-weight:600; color:#F8F5EF; background:#243A5E; border:none; padding:17px; border-radius:12px; cursor:pointer;">{{ downloadLabel }}</button>
+          <div style="display:flex; align-items:center; gap:8px; margin-top:14px;">
+            <span style="font-size:13px; color:#8A887F;">🔒</span>
+            <p style="font-size:12.5px; line-height:1.5; color:#8A887F;">{{ downloadNote }}</p>
+          </div>
+        </div>
+
+        <div style="margin-top:36px; text-align:left; background:#fff; border:1px solid rgba(36,58,94,0.10); border-radius:16px; padding:26px;">
+          <p style="font-family:'Fraunces',serif; font-size:19px; color:#243A5E; margin-bottom:16px;">Where to start tonight</p>
+          <ol style="list-style:none; counter-reset:s; display:flex; flex-direction:column; gap:13px;">
+            <sc-for list="{{ nextSteps }}" as="s" hint-placeholder-count="3">
+              <li style="display:flex; gap:14px; align-items:flex-start;">
+                <span style="font-family:'Fraunces',serif; font-size:16px; color:#B0673E; font-weight:600; min-width:18px;">{{ s.n }}</span>
+                <span style="font-size:15.5px; line-height:1.5; color:#54524C;">{{ s.text }}</span>
+              </li>
+            </sc-for>
+          </ol>
+        </div>
+        <p style="font-size:13.5px; color:#8A887F; margin-top:28px;">Trouble downloading? Reply to your receipt email and a human will help. 14-day guarantee applies.</p>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ EMAIL ============ -->
+  <sc-if value="{{ isEmail }}" hint-placeholder-val="{{ false }}">
+  <div style="min-height:100vh; background:#E4E0D7; padding:6vh 5vw; display:flex; flex-direction:column; align-items:center;">
+    <div style="display:flex; gap:8px; margin-bottom:24px;">
+      <button onClick="{{ showReceiptEmail }}" style="{{ emailTabReceipt }}">Receipt + download</button>
+      <button onClick="{{ showChecklistEmail }}" style="{{ emailTabChecklist }}">Free checklist delivery</button>
+    </div>
+
+    <sc-if value="{{ emailIsReceipt }}" hint-placeholder-val="{{ true }}">
+    <div style="width:100%; max-width:600px; background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 16px 44px rgba(36,40,50,0.16);">
+      <div style="background:#243A5E; padding:26px 34px; text-align:center;">
+        <span style="font-family:'Fraunces',serif; font-weight:500; font-size:22px; color:#F6F1E7;">The Home Transition System</span>
+      </div>
+      <div style="padding:38px 34px;">
+        <p style="font-size:12px; color:#9A887F; margin-bottom:22px;">Receipt · Order #HTS-2026-0418</p>
+        <h1 style="font-family:'Fraunces',serif; font-weight:400; font-size:30px; line-height:1.14; color:#243A5E; margin-bottom:16px;">Thank you — here's your workbook.</h1>
+        <p style="font-size:16px; line-height:1.62; color:#54524C; margin-bottom:26px;">Hi there,<br><br>Your purchase is confirmed and your download is ready. The link below is private to you and expires in 15 minutes for security — if it lapses, just reload your success page for a fresh one.</p>
+        <a onClick="{{ goSuccess }}" style="display:block; text-align:center; font-family:'Inter',sans-serif; font-size:16px; font-weight:600; color:#F8F5EF; background:#243A5E; text-decoration:none; padding:16px; border-radius:11px; cursor:pointer; margin-bottom:26px;">Download your PDF →</a>
+        <table style="width:100%; border-collapse:collapse; font-size:14.5px; color:#54524C; margin-bottom:26px;">
+          <tbody>
+            <tr><td style="padding:10px 0; border-bottom:1px solid #ECE7DD; color:#8A887F;">Item</td><td style="padding:10px 0; border-bottom:1px solid #ECE7DD; text-align:right; color:#2B2926;">Home Transition System (PDF)</td></tr>
+            <tr><td style="padding:10px 0; border-bottom:1px solid #ECE7DD; color:#8A887F;">Total paid</td><td style="padding:10px 0; border-bottom:1px solid #ECE7DD; text-align:right; color:#2B2926; font-weight:600;">$49.00 USD</td></tr>
+            <tr><td style="padding:10px 0; color:#8A887F;">Guarantee</td><td style="padding:10px 0; text-align:right; color:#2B2926;">14-day full refund</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:14px; line-height:1.6; color:#6B6962;">Questions or trouble downloading? Just reply to this email — a real person reads it.</p>
+      </div>
+      <div style="background:#F3EFE7; padding:22px 34px; border-top:1px solid #E4DFD4;">
+        <p style="font-size:12px; line-height:1.6; color:#9A887F;">The Home Transition System · This is a planning workbook, not legal, medical, or financial advice.<br>You received this because you purchased at our store. Receipts are transactional.</p>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ emailIsChecklist }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%; max-width:600px; background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 16px 44px rgba(36,40,50,0.16);">
+      <div style="background:#243A5E; padding:26px 34px; text-align:center;">
+        <span style="font-family:'Fraunces',serif; font-weight:500; font-size:22px; color:#F6F1E7;">The Home Transition System</span>
+      </div>
+      <div style="padding:38px 34px;">
+        <p style="font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#B0673E; font-weight:700; margin-bottom:18px;">Your free checklist</p>
+        <h1 style="font-family:'Fraunces',serif; font-weight:400; font-size:30px; line-height:1.14; color:#243A5E; margin-bottom:16px;">Before you say anything — here it is.</h1>
+        <p style="font-size:16px; line-height:1.62; color:#54524C; margin-bottom:26px;">Hi there,<br><br>Thanks for grabbing the checklist. It's the five things worth having ready before you raise the move with your parent — so the first conversation opens a door instead of slamming one.</p>
+        <a style="display:block; text-align:center; font-family:'Inter',sans-serif; font-size:16px; font-weight:600; color:#F8F5EF; background:#243A5E; text-decoration:none; padding:16px; border-radius:11px; cursor:pointer; margin-bottom:30px;">Download the checklist (PDF) →</a>
+        <div style="background:#FBF8F2; border:1px solid rgba(36,58,94,0.10); border-radius:12px; padding:22px 24px; margin-bottom:26px;">
+          <p style="font-family:'Fraunces',serif; font-size:18px; color:#243A5E; margin-bottom:8px;">When you're ready for the whole path</p>
+          <p style="font-size:14.5px; line-height:1.6; color:#54524C; margin-bottom:16px;">The full workbook takes you from that first talk to the first 30 days in the new place — six modules, the worked example, $49.</p>
+          <a onClick="{{ goLanding }}" style="font-size:14.5px; font-weight:600; color:#B0673E; cursor:pointer; text-decoration:underline; text-underline-offset:3px;">See the full workbook →</a>
+        </div>
+        <p style="font-size:14px; line-height:1.6; color:#6B6962;">No pressure, and no flood of email. Reply anytime — I read every one.</p>
+      </div>
+      <div style="background:#F3EFE7; padding:22px 34px; border-top:1px solid #E4DFD4;">
+        <p style="font-size:12px; line-height:1.6; color:#9A887F;">You're getting this because you requested the free checklist. <span style="text-decoration:underline;">Unsubscribe</span> anytime.<br>The Home Transition System · A planning workbook, not legal, medical, or financial advice.</p>
+      </div>
+    </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <!-- ============ CHECKOUT MODAL ============ -->
+  <sc-if value="{{ checkoutOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeCheckout }}" style="position:fixed; inset:0; z-index:80; background:rgba(20,24,34,0.55); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; padding:24px;">
+    <div onClick="{{ stop }}" style="width:100%; max-width:440px; background:#fff; border-radius:20px; padding:34px 32px; box-shadow:0 30px 70px rgba(0,0,0,0.4);">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:22px;">
+        <span style="font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#9A887F; font-weight:700;">Secure checkout</span>
+        <button onClick="{{ closeCheckout }}" style="background:none; border:none; font-size:20px; color:#9A887F; cursor:pointer; line-height:1;">✕</button>
+      </div>
+      <h2 style="font-family:'Fraunces',serif; font-weight:400; font-size:26px; line-height:1.16; color:#243A5E; margin-bottom:12px;">You'll finish on Stripe's secure page.</h2>
+      <p style="font-size:15px; line-height:1.6; color:#54524C; margin-bottom:22px;">We never see or store your card. In production, this button calls <span style="font-family:monospace; font-size:13px; background:#F3EFE7; padding:1px 6px; border-radius:5px;">/api/checkout</span> and redirects to Stripe-hosted Checkout — fulfillment happens only after the signed webhook confirms payment.</p>
+      <div style="background:#FBF8F2; border:1px solid rgba(36,58,94,0.12); border-radius:12px; padding:16px 18px; display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
+        <span style="font-size:15px; color:#3C3A36; font-weight:500;">Home Transition System</span>
+        <span style="font-family:'Fraunces',serif; font-size:22px; color:#243A5E; font-weight:600;">$49</span>
+      </div>
+      <button onClick="{{ simulatePayment }}" style="width:100%; font-family:'Inter',sans-serif; font-size:16px; font-weight:600; color:#F8F5EF; background:#243A5E; border:none; padding:16px; border-radius:12px; cursor:pointer;">Continue to payment →</button>
+      <p style="font-size:12px; color:#9A887F; text-align:center; margin-top:14px; font-style:italic;">Prototype: simulates a completed purchase → success page.</p>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    screen: 'landing',
+    checkoutOpen: false,
+    leadEmail: '',
+    leadSent: false,
+    leadError: false,
+    openFaq: null,
+    emailView: 'receipt',
+    downloading: false,
+  };
+
+  go(screen) {
+    this.setState({ screen });
+    if (typeof window !== 'undefined') window.scrollTo(0, 0);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const screen = s.screen;
+
+    const tabBase = 'font-family:Inter,sans-serif; font-size:13px; font-weight:600; border:none; border-radius:999px; padding:8px 15px; cursor:pointer; transition:all .15s;';
+    const tab = (name) => tabBase + (screen === name
+      ? ' background:#F3EFE7; color:#1A1C20;'
+      : ' background:transparent; color:#C2C7D0;');
+
+    const emailTab = (name) => 'font-family:Inter,sans-serif; font-size:13.5px; font-weight:600; border:1px solid rgba(36,58,94,0.16); border-radius:999px; padding:9px 18px; cursor:pointer;' + (s.emailView === name
+      ? ' background:#243A5E; color:#F6F1E7;'
+      : ' background:#fff; color:#5C5A55;');
+
+    const modules = [
+      { num: '01', title: 'The Conversation Module', benefit: 'Scripts for raising the topic without your parent feeling ambushed — including word-for-word responses to "I\u2019m not ready" and "You just want me out."' },
+      { num: '02', title: 'Room-by-Room Inventory & Triage', benefit: 'A first-pass system that turns "the whole house" into one small, doable decision at a time, with seven clear keep / sell / donate / gift categories.' },
+      { num: '03', title: 'The Sibling Coordination Board', benefit: 'Roles, a task board, and a weekly family-update template that stops one person from silently becoming the project manager.' },
+      { num: '04', title: 'Move Logistics Timeline', benefit: 'A flexible 8-week countdown that works even with no fixed move date, plus a first-night box list and move-day contact sheet.' },
+      { num: '05', title: 'Donation & Sell Tracker', benefit: 'Keeps piles from becoming permanent: donate, sell, and family-gift trackers with deadlines and fallbacks.' },
+      { num: '06', title: 'First 30 Days After the Move', benefit: 'A week-by-week settle-in plan for the part everyone forgets — when the boxes are moved but your parent hasn\u2019t actually landed yet.' },
+    ];
+
+    const features = [
+      { glyph: 'P', title: 'The High-Emotion Parking Lot Method', desc: 'How to keep one heirloom from derailing the entire project — a place to set the hard feelings down so the work can keep moving.' },
+      { glyph: '4', title: 'The "Start Here" Path Finder', desc: 'Four entry points — urgent trigger, declining upkeep, resistant parent, family conflict — so you know exactly where to begin.' },
+    ];
+
+    const paths = [
+      { tag: 'Urgent trigger', title: 'A fall, a diagnosis, a deadline', desc: 'Something just forced the issue and you need a move plan fast — start with logistics and the first-night essentials.' },
+      { tag: 'Declining upkeep', title: 'The house is getting to be too much', desc: 'No crisis yet, but the signs are adding up. Begin gently, with the conversation and a low-stakes first room.' },
+      { tag: 'Resistant parent', title: '"I\u2019m not going anywhere"', desc: 'The hardest start. Open with the Conversation Module and the scripts for the answers you\u2019re dreading.' },
+      { tag: 'Family conflict', title: 'Siblings aren\u2019t on the same page', desc: 'Before you touch a single box, set roles and a shared board so the work doesn\u2019t fall on one person.' },
+    ];
+
+    const pains = [
+      { mark: '\u2014', text: 'Every conversation about the house turns into a conversation about everything else.' },
+      { mark: '\u2014', text: '"The whole house" feels impossible, so nothing gets sorted and the date keeps slipping.' },
+      { mark: '\u2014', text: 'Your siblings mean well, but somehow it\u2019s all landed on you.' },
+      { mark: '\u2014', text: 'And underneath the logistics, you\u2019re grieving a place that raised you.' },
+    ];
+
+    const exampleRows = [
+      { item: 'Grandmother\u2019s quilt', tag: 'Gift \u2192 Mom' },
+      { item: 'Spare flat sheets ×6', tag: 'Donate' },
+      { item: 'Worn bath towels', tag: 'Recycle' },
+      { item: 'Linen tablecloth set', tag: 'Keep' },
+    ];
+
+    const nextSteps = [
+      { n: '1', text: 'Open the worked example first — see what a good first pass actually looks like.' },
+      { n: '2', text: 'Use the Path Finder to pick your one starting point. Just one.' },
+      { n: '3', text: 'Set a 30-minute timer and do a single closet. That\u2019s the whole job tonight.' },
+    ];
+
+    const leadBullets = [
+      'The five things to settle in your own head first',
+      'How to pick the moment (and the words) to open with',
+      'What not to say in the first five minutes',
+    ];
+
+    const faqData = [
+      { q: 'Is this legal, medical, or financial advice?', a: 'No. This is a planning and coordination workbook. It does not provide legal, tax, financial, medical, or real-estate advice — it helps your family organize the decisions and bring the right professionals in when needed.' },
+      { q: 'What format is it, and how do I use it?', a: 'A fillable PDF workbook. You can type directly into it on a screen or print it and write by hand — whatever works for your family. It\u2019s yours forever, on any device.' },
+      { q: 'We don\u2019t have a move date yet. Is it still useful?', a: 'Yes — that\u2019s exactly who it\u2019s built for. The Move Logistics Timeline works as a flexible countdown even with no fixed date, so you can start organizing before the calendar forces your hand.' },
+      { q: 'My parent is resistant. Will this help?', a: 'It\u2019s where many people start. The Conversation Module gives you scripts for the hardest replies, and the Path Finder has a dedicated "resistant parent" entry point so you\u2019re not improvising.' },
+      { q: 'What\u2019s your refund policy?', a: '14-Day Satisfaction Guarantee. If this workbook isn\u2019t a genuine help with your family\u2019s transition, email us within 14 days of purchase and we\u2019ll refund you in full — no forms, no hassle. We\u2019d rather you feel good about the purchase than hold onto $49.' },
+      { q: 'How do I get it after I buy?', a: 'Instantly. After checkout you\u2019ll land on a download page, and we\u2019ll also email a private link to your receipt address. The link is short-lived for security — if it expires, just reload your success page for a fresh one.' },
+    ];
+
+    const faqs = faqData.map((f, i) => ({
+      q: f.q,
+      a: f.a,
+      open: s.openFaq === i,
+      sign: s.openFaq === i ? '\u2013' : '+',
+      toggle: () => this.setState(st => ({ openFaq: st.openFaq === i ? null : i })),
+    }));
+
+    return {
+      // screen flags
+      isLanding: screen === 'landing',
+      isLead: screen === 'lead',
+      isSuccess: screen === 'success',
+      isEmail: screen === 'email',
+
+      // nav
+      goLanding: () => this.go('landing'),
+      goLead: () => this.go('lead'),
+      goSuccess: () => this.go('success'),
+      goEmail: () => this.go('email'),
+      tabLanding: tab('landing'),
+      tabLead: tab('lead'),
+      tabSuccess: tab('success'),
+      tabEmail: tab('email'),
+
+      // data
+      modules, features, paths, pains, exampleRows, nextSteps, leadBullets, faqs,
+
+      // checkout modal
+      checkoutOpen: s.checkoutOpen,
+      openCheckout: () => this.setState({ checkoutOpen: true }),
+      closeCheckout: () => this.setState({ checkoutOpen: false }),
+      stop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
+      simulatePayment: () => { this.setState({ checkoutOpen: false }); this.go('success'); },
+
+      // lead form
+      leadEmail: s.leadEmail,
+      leadSent: s.leadSent,
+      leadFormOpen: !s.leadSent,
+      leadError: s.leadError,
+      onLeadInput: (e) => this.setState({ leadEmail: e.target.value, leadError: false }),
+      submitLead: () => {
+        const ok = /.+@.+\..+/.test(s.leadEmail);
+        if (!ok) { this.setState({ leadError: true }); return; }
+        this.setState({ leadSent: true });
+      },
+
+      // success download
+      downloadLabel: s.downloading ? 'Preparing your secure link…' : 'Download your workbook (PDF)',
+      downloadNote: s.downloading
+        ? 'Generating a one-time signed URL that expires in 15 minutes.'
+        : 'Private, signed link — expires 15 minutes after you click, tied to your verified purchase.',
+      startDownload: () => {
+        this.setState({ downloading: true });
+        setTimeout(() => this.setState({ downloading: false }), 1600);
+      },
+
+      // email
+      emailIsReceipt: s.emailView === 'receipt',
+      emailIsChecklist: s.emailView === 'checklist',
+      showReceiptEmail: () => this.setState({ emailView: 'receipt' }),
+      showChecklistEmail: () => this.setState({ emailView: 'checklist' }),
+      emailTabReceipt: emailTab('receipt'),
+      emailTabChecklist: emailTab('checklist'),
+    };
+  }
+}
+</script>
+</body>
+</html>

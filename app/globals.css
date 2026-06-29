@@ -1,0 +1,62 @@
+/* Reset + base — ported faithfully from the imported design's <style> block. */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background: #f3efe7;
+}
+
+body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  color: #2b2926;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #243a5e;
+  color: #f8f5ef;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Accessibility: visible keyboard focus (WCAG 2.4.7). The design had no
+   focus styles; this preserves the look while keeping keyboard nav clear. */
+:focus-visible {
+  outline: 3px solid #b0673e;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Mobile-first responsiveness. The design's grids already use auto-fit/minmax,
+   but two fixed two-column blocks need to stack on small screens. */
+.we-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 46px;
+  align-items: center;
+}
+
+@media (max-width: 760px) {
+  .we-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* Header: keep the secondary text link out of the way on very small screens. */
+@media (max-width: 480px) {
+  .header-secondary-link {
+    display: none;
+  }
+}
