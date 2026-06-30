@@ -22,7 +22,21 @@ npm run dev      # http://localhost:3000
 | `/success`       | Post-payment screen. **Gated**: only shows the download when Stripe confirms the session is `paid`. |
 | `/api/checkout`  | POST → creates a Stripe Checkout Session, returns its URL.         |
 | `/api/webhooks/stripe` | POST → verifies the signed `checkout.session.completed` event and fulfills the order. |
-| `/checklist`     | **Not built yet** — the design's free lead-magnet screen.         |
+| `/api/download`  | GET `?session_id=…` → re-verifies the paid session, then streams the workbook PDF. |
+| `/checklist`     | Free lead-magnet screen (email capture → `/api/lead`).            |
+| `/api/lead`      | POST → captures the checklist signup (Supabase if configured, else logs). |
+
+## How the buyer gets the workbook
+1. CTA → `/api/checkout` → Stripe-hosted Checkout.
+2. Stripe redirects to `/success?session_id=…`, which **verifies payment** server-side.
+3. The download button hits `/api/download?session_id=…`, which **re-verifies the
+   paid session** and streams `private/Aging-Parent-Home-Transition-System.pdf`.
+   The PDF lives outside `/public`, so it's never directly reachable.
+
+> Note: the PDF is committed to this (private) repo and bundled with the
+> `/api/download` function via `outputFileTracingIncludes`. For stronger
+> isolation you can move it to private Vercel Blob later — the route is the only
+> thing that would change.
 
 ## Stripe / checkout status
 - `app/api/checkout/route.ts` is **stub-safe**: with no `STRIPE_SECRET_KEY` it

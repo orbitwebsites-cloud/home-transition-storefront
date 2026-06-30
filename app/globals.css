@@ -60,3 +60,17 @@ img {
     display: none;
   }
 }
+
+/* /checklist split layout — stacks on small screens. */
+.lead-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  min-height: 0;
+}
+
+@media (max-width: 860px) {
+  .lead-grid {
+    grid-template-columns: 1fr;
+  }
+}

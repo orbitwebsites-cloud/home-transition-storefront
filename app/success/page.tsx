@@ -123,7 +123,7 @@ export default async function SuccessPage({
             Unlocked
           </span>
         </div>
-        <DownloadButton />
+        <DownloadButton sessionId={session_id as string} />
       </div>
 
       <div style={{ marginTop: 36, textAlign: "left", background: "#fff", border: "1px solid rgba(36,58,94,0.10)", borderRadius: 16, padding: 26 }}>
