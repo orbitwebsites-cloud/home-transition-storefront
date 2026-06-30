@@ -27,7 +27,9 @@ npm run dev      # http://localhost:3000
 - `app/api/checkout/route.ts` is **stub-safe**: with no `STRIPE_SECRET_KEY` it
   returns `501` and the UI shows a "not configured" message — nobody is charged.
 - To enable real purchases: copy `.env.example` → `.env.local` and set
-  `STRIPE_SECRET_KEY` (and optionally `STRIPE_PRICE_ID`).
+  `STRIPE_SECRET_KEY` (required) and `STRIPE_PUBLISHABLE_KEY` (reserved for
+  client-side Stripe.js; not used by the current hosted-checkout redirect),
+  plus optionally `STRIPE_PRICE_ID`.
 - **No keys are committed.** Do not commit `.env.local`.
 - TODO: add a Stripe webhook route and grant the download only after a signed
   `checkout.session.completed` event (currently the success page is reachable
