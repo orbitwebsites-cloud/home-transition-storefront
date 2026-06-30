@@ -19,8 +19,9 @@ npm run dev      # http://localhost:3000
 | Path             | What it is                                                        |
 |------------------|-------------------------------------------------------------------|
 | `/`              | Sales / landing page (the imported design's main screen).         |
-| `/success`       | Post-payment screen (Stripe success_url target).                  |
+| `/success`       | Post-payment screen. **Gated**: only shows the download when Stripe confirms the session is `paid`. |
 | `/api/checkout`  | POST → creates a Stripe Checkout Session, returns its URL.         |
+| `/api/webhooks/stripe` | POST → verifies the signed `checkout.session.completed` event and fulfills the order. |
 | `/checklist`     | **Not built yet** — the design's free lead-magnet screen.         |
 
 ## Stripe / checkout status
@@ -31,9 +32,13 @@ npm run dev      # http://localhost:3000
   client-side Stripe.js; not used by the current hosted-checkout redirect),
   plus optionally `STRIPE_PRICE_ID`.
 - **No keys are committed.** Do not commit `.env.local`.
-- TODO: add a Stripe webhook route and grant the download only after a signed
-  `checkout.session.completed` event (currently the success page is reachable
-  directly — fine for the prototype, must be gated for production).
+- **Done:** webhook at `/api/webhooks/stripe` verifies the signed
+  `checkout.session.completed` event, and `/success` is gated — it retrieves
+  the session server-side and only reveals the download when `payment_status`
+  is `paid`. Set `STRIPE_WEBHOOK_SECRET` and register the endpoint in Stripe.
+- TODO: make fulfillment durable + idempotent — persist the order (e.g. Supabase
+  keyed by `session.id`) and email a short-lived **signed download URL**. The
+  `DownloadButton` still simulates the download until real file storage exists.
 
 ## Not yet implemented (present in the design, intentionally deferred)
 - Free-checklist lead magnet (`/checklist`) + lead capture (design note says it
