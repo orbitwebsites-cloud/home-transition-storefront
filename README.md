@@ -61,3 +61,26 @@ npm run dev      # http://localhost:3000
 
 ## Reference
 The original imported design is kept under `_design_import/` for comparison.
+
+## x402 bot paywall
+Humans browse free. AI crawlers/scrapers (User-Agent match, see `BOT_UA_PATTERNS`
+in `lib/x402-bot-paywall.ts`) get **HTTP 402** with x402 v2 payment requirements
+(`exact`, $0.001 USDC on Base, JSON body + `PAYMENT-REQUIRED` header). A bot that
+pays (`PAYMENT-SIGNATURE` header) is verified + settled via the facilitator and
+gets the page with a `PAYMENT-RESPONSE` header.
+
+- Wired in root `middleware.ts` (Node runtime); logic in `lib/x402-bot-paywall.ts`,
+  built on `@x402/core` + `@x402/evm` (`@x402/next` needs Next 16).
+- Never charged: Googlebot, Bingbot, DuckDuckBot, Slurp, Applebot, social/chat
+  link unfurlers, Vercel, uptime monitors.
+- Always free: `/api/*` (Stripe checkout/webhook, download, lead), `/_next/*`,
+  static files, `/robots.txt`, `/sitemap*.xml`, `/favicon*`, `/llms.txt`, `/.well-known/*`.
+- **Fails open**: any error or facilitator outage serves the page normally.
+- Config via env (see `.env.example`): `X402_ENABLED=false` kill switch,
+  `X402_PAY_TO`, `X402_PRICE`, `X402_NETWORK`, `CDP_API_KEY_ID` +
+  `CDP_API_KEY_SECRET` (Coinbase CDP facilitator), `X402_FACILITATOR_URL`.
+- **Base mainnet needs CDP keys** (or a mainnet `X402_FACILITATOR_URL`): the
+  default `https://x402.org/facilitator` only supports testnets, so with no keys
+  the paywall fails open and bots are served free.
+
+Test: `curl -A GPTBot localhost:3000/` → 402; `curl -A Googlebot …` → 200.
